@@ -10,6 +10,17 @@ def select(id):
         author = Author(result['name'],result['id'])
     return author
 
+def select_all():
+    authors = []
+    sql = "SELECT * FROM authors" 
+    results = run_sql(sql)
+    
+    for row in results:
+        author = Author(row['name'],row['id'])
+        authors.append(author)
+
+    return authors
+
 def save(author):
     sql = "INSERT INTO authors (name) VALUES (%s) RETURNING *"
     values = [author.name]
